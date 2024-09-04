@@ -1,4 +1,3 @@
-### README.md
 
 # Projeto: Jogo de Cliques - Android com Jetpack Compose
 
