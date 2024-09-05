@@ -48,111 +48,8 @@ A função `Jogar` é responsável por toda a lógica e layout do jogo.
 - **Diálogo:**
   - Um `AlertDialog` é exibido quando o usuário desiste ou finaliza o jogo, permitindo que ele reinicie o jogo ou encerre a sessão.
 
-```kotlin
-@Composable
-fun Jogar() {
-    val context = LocalContext.current
 
-    var cliques by remember { mutableStateOf(0) }
-    var maximoCliques by remember { mutableStateOf(Random.nextInt(1, 51)) }
-    var exibirDialogo by remember { mutableStateOf(false) }
-    var jogoFinalizado by remember { mutableStateOf(false) }
 
-    val recursoImagem = when {
-        cliques <= maximoCliques * 0.33 -> R.drawable.pobre
-        cliques <= maximoCliques * 0.66 -> R.drawable.medio
-        cliques < maximoCliques -> R.drawable.alto_4
-        else -> R.drawable.rico
-    }
-
-    fun reiniciar() {
-        cliques = 0
-        maximoCliques = Random.nextInt(1, 51)
-        jogoFinalizado = false
-    }
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Button(onClick = {
-            if (cliques < maximoCliques) {
-                cliques++
-            } else {
-                jogoFinalizado = true
-                exibirDialogo = true
-            }
-        }) {
-            Text(text = "Clicar")
-        }
-
-        Text(text = "Número de cliques: $cliques", fontSize = 18.sp)
-
-        Image(
-            painter = painterResource(id = recursoImagem),
-            contentDescription = null,
-            modifier = Modifier
-                .padding(top = 16.dp)
-                .size(150.dp)
-        )
-
-        Button(onClick = {
-            exibirDialogo = true
-        }, modifier = Modifier.padding(top = 16.dp)) {
-            Text(text = "Desistir")
-        }
-    }
-
-    if (exibirDialogo) {
-        AlertDialog(
-            onDismissRequest = { exibirDialogo = false },
-            title = { Text(text = if (jogoFinalizado) "Parabéns!" else "Desistência") },
-            text = {
-                Text(
-                    text = if (jogoFinalizado) {
-                        "Você atingiu 100% dos cliques! Gostaria de jogar novamente?"
-                    } else {
-                        "Novo jogo?"
-                    }
-                )
-            },
-            confirmButton = {
-                Button(onClick = {
-                    reiniciar()
-                    exibirDialogo = false
-                }) {
-                    Text("Sim")
-                }
-            },
-            dismissButton = {
-                Button(onClick = {
-                    exibirDialogo = false
-                    if (!jogoFinalizado) {
-                        Toast.makeText(context, "Fim de jogo", Toast.LENGTH_SHORT).show()
-                    }
-                }) {
-                    Text("Não")
-                }
-            }
-        )
-    }
-}
-```
-
-### 3. Função `JogarPreview()`
-
-Esta função é usada para visualização da UI no Android Studio. Ela permite ver uma prévia do layout sem precisar rodar o aplicativo em um dispositivo real ou emulador.
-
-```kotlin
-@Preview(showBackground = true)
-@Composable
-fun JogarPreview() {
-    Atividade1Theme {
-        Jogar()
-    }
-}
-```
 
 ## Como Executar
 
@@ -160,11 +57,6 @@ fun JogarPreview() {
 2. **Abrir no Android Studio:** Importe o projeto para o Android Studio.
 3. **Executar:** Conecte um dispositivo Android ou inicie um emulador e rode o aplicativo.
 
-## Contribuições
-
-Contribuições são bem-vindas! Se você encontrar problemas ou tiver sugestões de melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.
-
-## Licença
 
 Este projeto está licenciado sob os termos da licença MIT. Consulte o arquivo LICENSE para mais detalhes.
 
