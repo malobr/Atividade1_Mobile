@@ -58,8 +58,3 @@ A função `Jogar` é responsável por toda a lógica e layout do jogo.
 3. **Executar:** Conecte um dispositivo Android ou inicie um emulador e rode o aplicativo.
 
 
-Este projeto está licenciado sob os termos da licença MIT. Consulte o arquivo LICENSE para mais detalhes.
-
----
-
-Com este README, qualquer pessoa deve ser capaz de entender o propósito do projeto, sua estrutura, e como utilizá-lo. Se precisar de mais alguma coisa, estou à disposição!
